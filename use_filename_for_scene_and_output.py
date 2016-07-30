@@ -54,7 +54,6 @@ class FilenameToSceneAndOutput(bpy.types.Operator):
         return {'FINISHED'}
 
 def do_the_thing(scene):
-    print("Changing scene name...")
     fn = get_base_filename()
     bpy.context.scene.render.filepath = "//"+fn
     bpy.context.scene.name = fn
