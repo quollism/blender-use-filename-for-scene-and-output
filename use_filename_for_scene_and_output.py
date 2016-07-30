@@ -64,12 +64,14 @@ def view3d_fn2sao(self, context):
 
 def register():
     bpy.utils.register_class(FilenameToSceneAndOutput)
-    bpy.types.VIEW3D_HT_header.append(view3d_fn2sao)
+    ### uncomment for button
+    # bpy.types.VIEW3D_HT_header.append(view3d_fn2sao)
     bpy.app.handlers.save_post.append(do_the_thing)
 
 def unregister():
     bpy.utils.unregister_class(FilenameToSceneAndOutput)
-    bpy.types.VIEW3D_HT_header.remove(view3d_fn2sao)
+    ### uncomment for button
+    # bpy.types.VIEW3D_HT_header.remove(view3d_fn2sao)
     bpy.app.handlers.save_post.remove(do_the_thing)
 
 if __name__ == "__main__":
