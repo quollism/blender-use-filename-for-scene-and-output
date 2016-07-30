@@ -25,8 +25,8 @@
 bl_info = {
     "name": "Use Filename For Scene And Output",
     "author": "QUOLLISM",
-    "version": (0,1),
-    "blender": (2, 77, 1),
+    "version": (0,10),
+    "blender": (2, 77, 0),
     "description": "Adds button which copies current filename to scene and render output after saving",
     "category": "User Interface" }
 
