@@ -25,7 +25,7 @@
 bl_info = {
     "name": "Use Filename For Scene And Output",
     "author": "QUOLLISM",
-    "version": (0,9),
+    "version": (0,1),
     "blender": (2, 77, 1),
     "description": "Adds button which copies current filename to scene and render output after saving",
     "category": "User Interface" }
@@ -50,22 +50,28 @@ class FilenameToSceneAndOutput(bpy.types.Operator):
         return bpy.data.filepath != ''
 
     def execute(self, context):
-        fn = get_base_filename()
-        bpy.context.scene.render.filepath = "//"+fn
-        bpy.context.scene.name = fn
+        do_the_thing(bpy.context.scene)
         return {'FINISHED'}
+
+def do_the_thing(scene):
+    print("Changing scene name...")
+    fn = get_base_filename()
+    bpy.context.scene.render.filepath = "//"+fn
+    bpy.context.scene.name = fn
 
 def view3d_fn2sao(self, context):
     row = self.layout.row(align=True)
-    row.operator("scene.filename_to_scene_output", icon='COPYDOWN', text="Use Filename")
+    row.operator("scene.filename_to_scene_output", text="Force Use Filename")
 
 def register():
     bpy.utils.register_class(FilenameToSceneAndOutput)
     bpy.types.VIEW3D_HT_header.append(view3d_fn2sao)
+    bpy.app.handlers.save_post.append(do_the_thing)
 
 def unregister():
     bpy.utils.unregister_class(FilenameToSceneAndOutput)
     bpy.types.VIEW3D_HT_header.remove(view3d_fn2sao)
+    bpy.app.handlers.save_post.remove(do_the_thing)
 
 if __name__ == "__main__":
     register()
